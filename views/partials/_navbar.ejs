@@ -1,0 +1,25 @@
+
+    <div class = "navContainer">
+        <div class ="logoContainer">
+            <img src ="/assets/icons_nav/logo_planet-earth.png" class ="logo">
+        </div>
+
+        <div class="nav-items">
+            <%if (user) {%>
+            
+                <a href="/profile">My Profile</a>
+                <a href="/feed">Feed</a>    
+                <a href="/community">Community</a>
+                <a href="/sign-out">Sign Out</a>
+
+            <%} else {%>
+            <a href="/">Login</a>
+            <a href="/signup">Create Account</a>
+            <%}%>
+        </div>
+    </div>
+
+    
+
+
+

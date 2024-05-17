@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <style>
+        .layout {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin: 0 20px 0 20px;
+            max-width: 1000px;
+            justify-content: center;
+        }
+
+        .user-profile{
+            background-color: white;
+            padding: 50px;
+            border: 1px solid rgb(219, 219, 219);
+            border-radius: 10px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .user-profile .profile-photo img{
+            max-height: 100px;
+            max-width: 100px;
+            border-radius: 50%;
+        }
+
+        .bio{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <%- include('../partials/_navbar.ejs') %>
+    </nav>
+
+    <div class="layout">
+        <div class = "grid-container">
+        <%allUsers.forEach((user)=>{%>
+            
+            <% if (user._id.toString() !== viewerId.toString()) {%>
+                <div class ="user-profile">
+                    <div class ="profile-photo">
+                        <img src ="<%=user.profilePhotoUrl%>">
+                    </div>
+                    <div class ="bio">
+                        <h2><%=user.author%></h2>
+                        <h4><%=user.city%>, <%=user.state%></h4>
+                    </div>
+                    <a href="/profile/<%=user._id%>"><button>See Profile</button></a>
+                </div>
+            <% } %>
+        <%})%>
+        </div>
+    </div>
+
+</body>
+</html>

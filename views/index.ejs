@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/login.css">
+  <title>Login Page</title>
+</head>
+<body>
+
+  <nav>
+    <%- include('./partials/_navbar.ejs') %>
+  </nav>
+
+  
+  <div class = "layout">
+    <div class ="formContainer">
+      <h1>Welcome, let's login</h1>
+      <form action="" method="POST">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" name="username" required>
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" name="password" required>
+        </div>
+        <button type=""submit>Sign in</button>
+      </form>
+    </div>
+
+    <div>
+      <p>Can't login? <span><a href="/signup">Create an account</a></span></p>
+    </div>
+  </div>
+</body>
+
+</html>

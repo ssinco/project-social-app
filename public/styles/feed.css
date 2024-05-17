@@ -1,0 +1,350 @@
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    column-gap: 30px;
+    margin: 0 50px 0 50px;
+}
+
+.profile{
+    background-color: white;
+    padding: 30px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 10px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile .profile-photo img{
+    max-height: 100px;
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.profile h2{
+    margin-bottom: 0px;
+}
+
+.profile button{
+    margin-top: 10px;
+}
+
+/* Post styling
+-------------------------------------  */
+
+.postsContainer {
+    /* background-color: white; */
+    max-width: 800px;
+}
+
+.createPost {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    
+    display:flex;
+}
+
+.createPost form{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width:100%;
+    margin-left: 10px;
+}
+.createPost textarea{
+    font-size: 1em;
+    flex-grow: 1;
+    width:100%;
+    background-color: #fafafa;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.createPost button{
+    margin-top: 10px;
+    flex-grow: 0;
+    width: auto;
+}
+
+.post {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.post button {
+    display:block;
+}
+
+.postHeader, .modify {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.postAuthor{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.postContent{
+    margin-bottom: 10px;
+}
+.user-photo-post{
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+    /* border: 1px solid rgb(183, 183, 183);  */
+}
+
+.postFooter {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+    font-size: 0.90em;
+}
+
+
+/* Comments styling
+-------------------------------------  */
+
+.comment {
+    margin: 0 0 10px 20px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fafafa;
+    
+}
+
+.user-photo-comment{
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
+    /* border: 0.5px solid black;  */
+}
+
+.comment .commentContent{
+    margin: 0 0 5px 0;
+}
+
+.postCommentContainer{
+    margin-top: 10px;
+
+}
+.postComment form{
+    display:flex;
+    width:100%;
+}
+
+.postComment input{
+    flex-grow: 1;
+    margin-left: 5px;
+    font-size: 1em;
+    width:100%;
+    background-color: #fafafa;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 5px;
+    border-radius: 4px;
+    
+}
+
+.postComment button{
+    margin-left: 5px;
+}
+
+
+.commentAuthor{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.commentSection {
+    /* margin-top:10px; */
+    font-size: 0.9em;
+
+    /* display: none; */
+}
+
+.viewComments{
+    display: none;
+    
+}
+
+.viewComments.active{
+    display: initial;
+    margin-left: 20px;
+}
+
+.button-text{
+    background: none;   /* Remove background */
+    border: none;       /* Remove border */
+    padding: 0;         /* Remove padding */
+    margin: 0;          /* Remove margin */
+    font: inherit;      /* Inherit font properties from parent */
+    cursor: pointer;    /* Ensure it has a pointer cursor to indicate clickability */
+    outline: none;      /* Remove focus outline - remember to handle focus styles for accessibility */
+    /* text-decoration: underline;  */
+}
+
+.editButton {
+    color: #909090;
+    font-size: 1em;
+}  
+
+.deleteButton {
+    color: #909090;
+    font-size: 1.5em;
+}
+
+
+
+
+/* Modals
+-------------------------------------  */
+
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%) scale(0);
+    border: 1px sollid black;
+    z-index: 10;
+    background-color:white;
+    width: 800px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.modal.active {
+    transform: translate(-50%,-50%) scale(1);
+}
+
+.modalHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0 20px;
+    text-align: center;
+}
+
+.modalHeader .close-button{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+
+
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    pointer-events: all;
+    opacity: 1;
+}
+
+
+/* Edit Modal */
+
+.modalBody{
+    background-color: white;
+    padding: 20px;
+    /* border: 1px solid rgb(219, 219, 219); */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display:flex;
+}
+
+#editModal .modalBody form{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width:100%;
+}
+
+
+#editModal .modalBody form textarea{
+    font-size: 1em;
+    flex-grow: 1;
+    width:100%;
+    background-color: #fafafa;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.modalBody button{
+    margin-top: 10px;
+    flex-grow: 0;
+    width: auto;
+    font-size: 1em;
+}
+
+
+
+
+/* Top stories styling
+-------------------------------------  */
+
+
+.sidebar {
+
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 30px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 10px;
+    min-height: 300px;
+    max-height: 100%; /* Ensure it doesn't grow taller than the container */
+    overflow: auto; /* Allow content to scroll if necessary */
+    flex-grow: 1; /* Allow the sidebar to grow */
+}
+
+
+.sidebar .user-table{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 5px;
+}
+
+.sidebar .author{
+    font-weight: bold;
+}
+
+.sidebar .postcount{
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+
+
+

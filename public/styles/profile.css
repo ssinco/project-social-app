@@ -1,0 +1,77 @@
+
+
+img {
+    max-height: 100px;
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 50px;
+    margin: 0 100px 0 100px;
+    /* max-width: 800px; */
+}
+
+form { 
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 40px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 10px;
+}
+
+
+input {
+    font-size: 1em;
+    flex-grow: 1;
+    width:100%;
+    background-color: #fafafa;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+
+button {
+    margin-top: 40px;
+    flex-grow: 0;
+    padding: 30px;
+    font-size: 1.5em;
+    background-color: #0077B5; 
+    color: white;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.field.photo {
+    flex-direction: row;
+    align-items: center;
+}
+
+.field.photo input[type="radio"]{
+    display:none;
+}
+
+.field.photo label {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin: 5px;
+    transition: border 0.3s;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.field.photo input[type="radio"]:checked + label {
+    padding: 10px;
+    background-color: #fafafa;
+    border: 1px solid rgb(219, 219, 219);
+}
+

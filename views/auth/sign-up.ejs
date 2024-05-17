@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/login.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+      <%- include('../partials/_navbar.ejs') %>
+    </nav>
+
+    <div class = "layout">
+      <div class = "formContainer">
+        <h1>Create Your Account</h1>
+        <form action="/signup/create" method="POST">
+            
+          <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+          </div>
+
+          <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+          </div>
+
+          <div>
+              <label for="confirmPassword">Confirm Password:</label>
+              <input type="password" name="confirmPassword" required>
+          </div>
+
+          <div class ="field">
+            <label for="author">Profile Name: (posts will be under this name)</label>
+            <input type="text" name="author"  required>
+          </div>
+          <div class ="field">
+            <label for="city">Current City:</label>
+            <input type="text" name="city"  required>
+          </div>
+          <div class ="field">
+              <label for="state">State: (e.g. CA, NY WA, TX...)</label>
+              <input type="text" name="state" required>
+          </div>
+
+          <br>
+
+          <label for="field photo">Pick your photo!</label>
+          <div class ="field photo">
+            <input type ="radio" id="oragamiBlue" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-blue.png">
+              <label for="oragamiBlue">
+                <img src="/assets/icons_profile/icon_profile_origami-blue.png">
+              </label>
+          
+            <input type ="radio" id ="oragamiBw" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-outline-bw.png">
+              <label for="oragamiBw">
+                <img src="/assets/icons_profile/icon_profile_origami-outline-bw.png">
+              </label>
+
+            <input type ="radio" id="oragamiOutlineColor" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-outline-color.png">
+              <label for="oragamiOutlineColor">
+                <img src="/assets/icons_profile/icon_profile_origami-outline-color.png">
+              </label>
+            
+            <input type ="radio" id="oragamiPurple" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-purple.png">
+              <label for="oragamiPurple">
+                <img src="/assets/icons_profile/icon_profile_origami-purple.png">
+              </label>
+            
+            <input type ="radio" id="oragamiTeal" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-teal.png">
+              <label for="oragamiTeal">
+                <img src="/assets/icons_profile/icon_profile_origami-teal.png">
+              </label>
+          </div>
+
+
+          <button type=""submit>Create Account</button>
+        </form>
+      </div>
+      <div>
+        <p>Already have an account? <span><a href="/">Login</a></span></p>
+      </div>
+    </div>
+</html>

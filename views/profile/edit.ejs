@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/profile.css">
+    
+</head>
+
+<body>
+    <nav>
+      <%- include('../partials/_navbar.ejs') %>
+    </nav>
+    <div class="grid-container">
+      <div class = "profile">
+          <h1>Edit Profile</h1>
+          <form action="/profile/edit?_method=PUT" method="POST">
+              <div class ="field">
+                <label for="author">Profile Name:</label>
+                <input type="text" name="author" value="<%=user.author%>" required>
+              </div>
+              <div class ="field">
+                <label for="city">Current City:</label>
+                <input type="text" name="city" value="<%=user.city%>" required>
+              </div>
+              <div class ="field">
+                  <label for="state">State: (e.g. CA, NY WA, TX...)</label>
+                  <input type="text" name="state" value="<%=user.state%>" required>
+              </div>
+              <br>
+              <label for="field photo">Pick your photo!</label>
+              <div class ="field photo">
+                <input type ="radio" id="oragamiBlue" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-blue.png">
+                  <label for="oragamiBlue">
+                    <img src="/assets/icons_profile/icon_profile_origami-blue.png">
+                  </label>
+              
+                <input type ="radio" id ="oragamiBw" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-outline-bw.png">
+                  <label for="oragamiBw">
+                    <img src="/assets/icons_profile/icon_profile_origami-outline-bw.png">
+                  </label>
+
+                <input type ="radio" id="oragamiOutlineColor" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-outline-color.png">
+                  <label for="oragamiOutlineColor">
+                    <img src="/assets/icons_profile/icon_profile_origami-outline-color.png">
+                  </label>
+                
+                <input type ="radio" id="oragamiPurple" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-purple.png">
+                  <label for="oragamiPurple">
+                    <img src="/assets/icons_profile/icon_profile_origami-purple.png">
+                  </label>
+                
+                <input type ="radio" id="oragamiTeal" name="profilePhotoUrl" value="/assets/icons_profile/icon_profile_origami-teal.png">
+                  <label for="oragamiTeal">
+                    <img src="/assets/icons_profile/icon_profile_origami-teal.png">
+                  </label>
+              </div>
+
+              <button type="submit">Update Profile</button>
+            </form>
+      </div>
+      <div class="account-settings">
+        <h1>Account Settings</h1>
+            <ul>
+              <li>username: <%=user.username%></li>
+            </ul>
+      </div>
+    </div>
+
+</body>
+</html>

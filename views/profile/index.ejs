@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/feed.css">
+
+
+    <script defer src="/js/profile/index.js"></script>
+
+    <!-- <style> 
+        div {
+            border: 1px dotted black; 
+        }
+
+        div.viewComments{
+            /* box-sizing: border-box; */
+            margin: 0px;
+        }
+        .layout{
+            display: flex;
+            /* justify-content: space-between; */
+            gap: 30px;
+        }
+        .post {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid black;
+        }
+        .header, .modify {
+            display: flex;
+            justify-content: space-between;
+        }
+        .modal{
+            position: fixed;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%) scale(0);
+            border: 1px sollid black;
+            z-index: 10;
+            background-color:white;
+            width: 500px;
+            max-width: 80%;
+        }
+
+        .modal.active {
+            transform: translate(-50%,-50%) scale(1);
+        }
+
+        .modalHeader{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .modalHeader .close-button{
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 1.25em;
+            font-weight: bold;
+        }
+        
+        .user-photo.post{
+            max-width: 30px;
+            max-height: 30px;
+            border-radius: 10px;
+            border: 1px solid black; 
+        }
+        .user-photo.comment{
+            max-width: 20px;
+            max-height: 20px;
+            border-radius: 5px;
+            border: 0.5px solid black; 
+        }
+
+        .postAuthor {
+            display: flex;
+            gap: 10px;
+            
+        }
+        .postFooter {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .commentAuthor{
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        .commentSection {
+            margin-top:10px;
+            font-size: 0.9em;
+            padding-left: 20px;
+            /* display: none; */
+        }
+
+        .viewComments{
+            display: none;
+        }
+
+        .viewComments.active{
+            display: initial;
+        }
+
+        .button-text{
+            background: none;   /* Remove background */
+            border: none;       /* Remove border */
+            padding: 0;         /* Remove padding */
+            margin: 0;          /* Remove margin */
+            font: inherit;      /* Inherit font properties from parent */
+            cursor: pointer;    /* Ensure it has a pointer cursor to indicate clickability */
+            text-decoration: underline; /* Optionally add underline to mimic a link */
+            outline: none;      /* Remove focus outline - remember to handle focus styles for accessibility */
+        }
+
+        #overlay {
+            position: fixed;
+            opacity: 0;
+            top: 0;
+            left:0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,.5);
+            pointer-events: none;
+        }
+
+        #overlay.active {
+            pointer-events: all;
+            opacity: 1;
+        } -->
+
+    </style>
+</head>
+<body>
+    <nav>
+        <%- include('../partials/_navbar.ejs') %>
+    </nav>
+
+    <div class = "grid-container">
+
+        <div class = "profileContainer">
+
+            <div class="profile">
+                <div class ="profile-photo">
+                    <img src ="<%=user.profilePhotoUrl%>">
+                </div>
+                <div class ="bio">
+                    <h2><%=user.author%></h2>
+                    <h4><%=user.city%>, <%=user.state%></h4>
+                </div>
+
+                <% if (user._id.toString() === viewerId.toString()) {%>
+                    <a href = "/profile/edit"><button>Edit Profile</button></a>
+                <% } %>
+            </div>    
+
+        </div>
+
+        <div class = "postsContainer">
+            <% if (user._id.toString() === viewerId.toString()){%>
+                <div class = "createPostContainer">
+                    <div class = "createPost">
+                        <img src="<%=user.profilePhotoUrl%>" class="user-photo-comment">
+                        <form action="/profile/post" method="POST">  
+                            <textarea id="content" name="content" rows="4" placeholder="What's on your mind, <%=user.author%>?" required></textarea>
+                            <button type="submit">Post</button>
+                        </form>
+    
+                    </div>
+                </div>
+            <%}%>
+        
+            <div class ="postFeed">
+                <%allPosts.forEach((post)=>{ %>
+
+                <div class ="post">
+
+                    <div class = "postHeader">
+
+                        <div class ="postAuthor">
+                            <img src="<%=user.profilePhotoUrl%>" class="user-photo-post">
+                            <h2><%=post.author%></h2>
+                        </div>
+                        <!-- edit / delete buttons -->
+                        <% if (user._id.toString() === viewerId.toString()){%>
+                        <div class ="modify">
+                            <!-- EDIT BUTTON -->
+                            <button class="editButton button-text" data-modal-target="#editModal" class="open-button" data-id="<%=post._id%>" data-content="<%=post.content%>">• • •</button>
+                            <!-- DELETE BUTTON -->
+                            <button class="deleteButton button-text" data-modal-target="#deleteModal" class="open-button" data-id="<%=post._id%>">&times;</button>
+                        </div>
+                        <%}%>
+                    </div> 
+
+                    <div class ="postContent">
+                        <p><%=post.content%></p>
+                    </div>
+
+                    <!-- like/comment buttons -->
+                    <div class ="postFooter">
+                        <div class ="engage">
+                            <form action="/profile/like/<%=post._id%>" method="POST">
+                                <button type="submit"><%=post.userLikes.length%> Likes</button>
+                            </form>
+
+                            <!-- <button>comment</button> -->
+                        </div>
+                        <!-- if someone clicks comment 
+                            Open a div below post that allows user to post
+                            Append the div to the 'Comment section' div
+                        -->
+                        <button data-comment-target="#viewComments" class="commentShowButton button-text" data-id="<%=post._id%>"><%=post.comments.length%> Comments</button>
+                    </div>
+                    
+                    <div class ="commentSection">
+                        
+                        <!-- Show all the comments for this post -->
+
+                        <div class = "viewComments" id="viewComments" data-id="<%=post._id%>">
+                            <%post.comments.forEach((comment)=>{ %>
+
+                                <div class = "comment">   
+                                    <div class = "commentAuthor">
+                                        <img src="<%=comment.commenterId.profilePhotoUrl%>" class="user-photo-comment">
+                                        <h3><%=comment.commenter%></h3>
+                                    </div>
+                                    <div class = "commentContent">
+                                        <p><%=comment.content%></p>
+                                    </div>
+                                </div>
+                            <%})%>
+                        </div>
+                        
+
+                        <div class = "postCommentContainer">
+                            <div class = "postComment">
+                                <form action="/profile/comment/<%=post._id%>" method="POST">
+                                    <input type="text" name="comment" placeholder="Make a comment" required>
+                                    <button type="submit">Post</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <br>
+
+                </div>
+                <%})%>
+
+                
+               <!-- edit form -->
+                <div class="modal edit" id="editModal">
+                    <div class = "modalHeader">
+                        <p>Edit Your Post</p>
+                        <button data-close-button class="close-button">&times;</button>
+                    </div>
+                    <div class = "modalBody">
+                        <form id="editForm" action="" method="POST">
+                            <!-- <label for="content">Edit Your Post</label> -->
+                            <textarea id="content" name="content" rows="4" value="" required></textarea>
+
+                            <!-- <input type="text" name="content" required> -->
+
+                            <button type="submit">Update</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- delete form -->
+                <div class="modal delete" id="deleteModal">
+                    <div class = modalHeader>
+                        <p>Are you sure you want to delete this post?</p>
+                        <button data-close-button class="close-button">&times;</button>
+                    </div>
+                    <div class = modalBody>
+                        <form id="deleteForm" action="" method="POST">
+                        <button type="submit">Yes</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- overlay -->
+                <div id ="overlay"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
