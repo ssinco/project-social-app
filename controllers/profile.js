@@ -34,21 +34,6 @@ router.get('/', async (req,res) => {
     }
 })
 
-// router.get('/', async (req,res)=>{
-//     try {
-//       const allUserPosts = await Post.find({authorId: req.session.user._id})
-//       const user = await User.findById(req.session.user._id)
-//       const viewerId = req.session.user._id 
-//       res.render('../views/profile/index', {
-//         allPosts: allUserPosts,
-//         user: user,
-//         viewerId: viewerId,
-//       })
-//     } catch(error){
-//       res.send('error')
-//     }
-//   })
-
 // Show the profile edit page
 router.get('/edit', async (req,res)=>{
     try {
