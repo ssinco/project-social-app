@@ -19,6 +19,10 @@ const Post = require('./models/posts.js');
 const app = express();
 // configure express to use EJS and look in the "views" folder
 app.set('view engine', 'ejs');
+
+const path = require('path'); // Ensure 'path' is required for path operations
+app.set('views', [path.join(__dirname, 'views'), path.join(__dirname)]); // tell express to look for views in root and views folder
+
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -67,7 +71,7 @@ app.listen(port,function() {
 
 // Render homepage
 app.get('/',(req,res) => {
-  res.render('../views/index')
+  res.render('index')
 })
 
 // Render signup page
