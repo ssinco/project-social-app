@@ -65,10 +65,6 @@ app.use(express.static('public'))
 /* Routes
 -------------------------------------------------- */
 
-app.listen(port,function() {
-  console.log('Express app running on port ' + port)
-})
-
 // Render homepage
 app.get('/',(req,res) => {
   res.render('index')
@@ -146,3 +142,7 @@ app.use('/profile',profileController)
 app.use('/community',communityController)
 
 
+
+app.listen(port,function() {
+  console.log('Express app running on port ' + port)
+})
