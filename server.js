@@ -45,7 +45,11 @@ const communityController = require('./controllers/community.js')
 const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 
-app.use(morgan('dev'))
+// Detect if running in a dev environment
+if (process.env.ON_HEROKU === 'false') {
+  app.use(morgan('dev'))
+}
+
 // Used to parse request bodies from PUT/PATCH/POST requests
 app.use(express.urlencoded({ extended: false }))
 // Allow HTML forms to send PUT/DELETE requests instead of just GET or POST
@@ -131,6 +135,9 @@ app.post('/', async (req,res) => {
     res.send('Invalid username - please try again')
   }
 })
+
+
+
 
 app.get('/sign-out', (req,res) => {
   req.session.destroy()
